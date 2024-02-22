@@ -28,6 +28,25 @@ export const taskAPI = apiSlice.injectEndpoints({
         method: "PUT",
         body: taskData,
       }),
+
+      async onQueryStarted({ taskId, taskData }, { queryFulfilled, dispatch }) {
+        const editTask = dispatch(
+          apiSlice.util.updateQueryData("getAllTask", undefined, (draft) => {
+            return draft.map((task) => {
+              if (task.id === taskId) {
+                return taskData;
+              }
+              return task;
+            });
+          })
+        );
+
+        try {
+          await queryFulfilled;
+        } catch {
+          editTask.undo();
+        }
+      },
     }),
 
     deleteTask: builder.mutation({

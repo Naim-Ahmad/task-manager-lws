@@ -128,7 +128,8 @@
         "colorClass": "color-scoreboard"
       },
       "deadline": "2023-03-11",
-      "id": 4
+      "id": 4,
+      "status": "pending"
     },
     {
       "taskName": "Fix a bug",

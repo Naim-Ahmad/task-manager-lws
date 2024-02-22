@@ -14,13 +14,13 @@ export default function ProjectItem({ project }) {
     }
   }, [dispatch])
 
-  const handleChange = () => {
+  const handleProject = () => {
     dispatch(toggleProject(projectName))
   }
 
   return (
-    <div onClick={handleChange} className="checkbox-container">
-      <input type="checkbox" className={`color-scoreboard ${colorClass}`} checked={checkedProjects.includes(projectName)}/>
+    <div  className="checkbox-container">
+      <input onChange={handleProject} type="checkbox" className={`color-scoreboard ${colorClass}`} checked={checkedProjects.includes(projectName)}/>
       <p className="label">{projectName}</p>
     </div>
   )
