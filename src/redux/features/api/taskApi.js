@@ -20,6 +20,18 @@ export const taskAPI = apiSlice.injectEndpoints({
         method: "POST",
         body: taskData,
       }),
+      async onQueryStarted(args, { queryFulfilled, dispatch }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(
+            apiSlice.util.updateQueryData("getAllTask", undefined, (draft) => {
+              draft.push(data);
+            })
+          );
+        } catch (err) {
+          console.log(err);
+        }
+      },
     }),
 
     editTask: builder.mutation({
@@ -54,6 +66,19 @@ export const taskAPI = apiSlice.injectEndpoints({
         url: `/tasks/${taskId}`,
         method: "DELETE",
       }),
+
+      async onQueryStarted(args, { queryFulfilled, dispatch }) {
+        const deleteData = dispatch(
+          apiSlice.util.updateQueryData("getAllTask", undefined, (draft) => {
+            return draft.filter((task) => task.id !== args);
+          })
+        );
+        try {
+          await queryFulfilled;
+        } catch {
+          deleteData.undo();
+        }
+      },
     }),
   }),
 });

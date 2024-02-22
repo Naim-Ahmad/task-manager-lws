@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import App from './App.jsx'
 import './index.css'
 import TaskAddPage from './pages/TaskAddPage.jsx'
+import TaskEdit from './pages/TaskEdit.jsx'
 import TaskManagerHome from './pages/TaskManagerHome.jsx'
 import store from './redux/store/store.js'
 
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/edit/:taskId",
-        element: <TaskAddPage />
+        element: <TaskEdit />
       },
       {
         path: "/addTask",
