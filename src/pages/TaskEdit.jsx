@@ -1,18 +1,22 @@
+import { useParams } from "react-router-dom";
 import EditTaskForm from "../components/form/EditTaskForm";
 import { useGetAllProjectsQuery } from "../redux/features/api/projectAPI";
+import { useGetTaskQuery } from "../redux/features/api/taskApi";
 import { useGetAllMembersQuery } from "../redux/features/api/teamAPI";
 
 export default function TaskEdit() {
 
   const { data: projects = [], isLoading: isProjectsLoading } = useGetAllProjectsQuery()
   const { data: members = [], isLoading: isMembersLoading } = useGetAllMembersQuery()
+  const {taskId} = useParams()
+  const {data:task, isLoading:isTaskLoading} = useGetTaskQuery(taskId)
 
   let content = null;
-  if (isProjectsLoading && isMembersLoading) {
+  if (isProjectsLoading || isMembersLoading || isTaskLoading) {
     content = <div>Loading...</div>
   } else {
     if (projects.length > 0 && members.length > 0) {
-      content = <EditTaskForm members={members} projects={projects} />
+      content = <EditTaskForm members={members} projects={projects} task={task} />
     } else {
       content = <div>Something went wrong.</div>
     }

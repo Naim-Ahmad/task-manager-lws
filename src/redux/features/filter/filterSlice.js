@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   checkedProjects: [],
+  searchTask: "",
 };
 
 export const filterSlice = createSlice({
@@ -24,7 +25,11 @@ export const filterSlice = createSlice({
     syncCheckedProjects: (state, actions) => {
       state.checkedProjects = actions.payload;
     },
+    setSearchText: (state, action) => {
+      state.searchTask = action.payload;
+    },
   },
 });
 
-export const { toggleProject, syncCheckedProjects } = filterSlice.actions;
+export const { toggleProject, syncCheckedProjects, setSearchText } =
+  filterSlice.actions;

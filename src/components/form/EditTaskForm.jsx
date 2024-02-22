@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAddTaskMutation } from "../../redux/features/api/taskApi";
+import { useEditTaskMutation } from "../../redux/features/api/taskApi";
 
-export default function EditTaskForm({ members, projects }) {
+export default function EditTaskForm({ members, projects, task }) {
 
-  const [addTask, {isSuccess}] = useAddTaskMutation() 
+  const [editTask, {isSuccess}] = useEditTaskMutation() 
   const navigate = useNavigate()
 
   useEffect(()=>{
@@ -19,15 +19,15 @@ export default function EditTaskForm({ members, projects }) {
     const memberId = e.target.teamMember.value;
     const projectId = e.target.project.value;
     const deadline = e.target.deadline.value;
+
     const taskInfo = {
       taskName,
       teamMember: members.find(member=> member.id == memberId),
       project: projects.find(project=> project.id == projectId),
       deadline,
-
     }
 
-    addTask(taskInfo)
+    editTask({taskId: task.id, taskData: taskInfo})
   }
 
   return (
@@ -39,13 +39,14 @@ export default function EditTaskForm({ members, projects }) {
           name="taskName"
           id="lws-taskName"
           required
+          defaultValue={task.taskName}
           placeholder="Implement RTK Query"
         />
       </div>
 
       <div className="fieldContainer">
         <label>Assign To</label>
-        <select defaultValue="select" name="teamMember" id="lws-teamMember" required>
+        <select defaultValue={task.teamMember.id} name="teamMember" id="lws-teamMember" required>
           <option value="select" hidden>Select Job</option>
           {
             members.map(member => <option key={member.id} value={member.id}>{member.name}</option>)
@@ -55,7 +56,7 @@ export default function EditTaskForm({ members, projects }) {
       </div>
       <div className="fieldContainer">
         <label htmlFor="lws-projectName">Project Name</label>
-        <select defaultValue={"selected"} id="lws-projectName" name="project" required>
+        <select defaultValue={task.id} id="lws-projectName" name="project" required>
           <option value="selected" hidden>Select Job</option>
           {
             projects.map(project => <option key={project.id} value={project.id}>{project.projectName}</option>)
@@ -65,11 +66,11 @@ export default function EditTaskForm({ members, projects }) {
 
       <div className="fieldContainer">
         <label htmlFor="lws-deadline">Deadline</label>
-        <input type="date" name="deadline" id="lws-deadline" required />
+        <input defaultValue={task.deadline} type="date" name="deadline" id="lws-deadline" required />
       </div>
 
       <div className="text-right">
-        <button type="submit" className="lws-submit">Save</button>
+        <button type="submit" className="lws-submit">Save Changes</button>
       </div>
     </form>
   )

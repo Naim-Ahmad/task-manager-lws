@@ -70,20 +70,19 @@
   ],
   "tasks": [
     {
-      "taskName": "Task One",
+      "taskName": "implement debaunce",
       "teamMember": {
-        "name": "Saad Hasan",
-        "avatar": "/src/assets/avatars/sadh.png",
-        "id": 2
+        "name": "Arif Almas",
+        "avatar": "/src/assets/avatars/almas.png",
+        "id": 7
       },
       "project": {
-        "id": 1,
-        "projectName": "Scoreboard",
-        "colorClass": "color-scoreboard"
+        "id": 6,
+        "projectName": "Job Finder",
+        "colorClass": "color-jobFinder"
       },
-      "deadline": "2023-03-15",
-      "id": 1,
-      "status": "inProgress"
+      "deadline": "2023-03-16",
+      "id": 1
     },
     {
       "taskName": "Task Two",
@@ -103,9 +102,9 @@
     {
       "taskName": "Task Three",
       "teamMember": {
-        "name": "Sumit Saha",
-        "avatar": "/src/assets/avatars/sumit.png",
-        "id": 1
+        "name": "Md Salahuddin",
+        "avatar": "/src/assets/avatars/salahuddin.png",
+        "id": 4
       },
       "project": {
         "id": 3,
